@@ -8,38 +8,47 @@ interface Props {
 const projectsStatic: Project[] = [
   {
     id: 1,
-    title: 'Sistema de Gerenciamento de Tarefas',
-    description: 'API RESTful com Spring Boot para gerenciamento de tarefas. Implementa CRUD completo, autenticação JWT e banco de dados relacional.',
-    technologies: 'Java · Spring Boot · JPA · H2 · REST API',
-    githubUrl: 'https://github.com/pauloartur23',
+    title: 'Employee Management System',
+    description: 'Sistema completo de gerenciamento de funcionários em Java com Spring Boot. Cadastro, edição, listagem e remoção de colaboradores com persistência em banco de dados.',
+    technologies: 'Java · Spring Boot · JPA · REST API · Maven',
+    githubUrl: 'https://github.com/pauloartur23/employee-management-system',
     category: 'Java',
     featured: true,
   },
   {
     id: 2,
-    title: 'API de Cadastro de Clientes',
-    description: 'API com Java e Spring Boot para gerenciamento de clientes. Validações, tratamento de exceções e documentação Swagger.',
-    technologies: 'Java · Spring Boot · Swagger · Maven',
-    githubUrl: 'https://github.com/pauloartur23',
-    category: 'Java',
+    title: 'Gerenciamento de Ingressos Full Stack',
+    description: 'Aplicação full stack para gerenciamento e venda de ingressos. Back-end em Java com Spring Boot e controle de eventos e disponibilidade.',
+    technologies: 'Java · Spring Boot · JPA · REST API · Full Stack',
+    githubUrl: 'https://github.com/pauloartur23/gerenciamento-ingressos-fullstack',
+    category: 'Full Stack',
     featured: true,
   },
   {
     id: 3,
-    title: 'Sistema de Controle de Estoque',
-    description: 'Projeto Java para controle de estoque. Padrão MVC com persistência em banco de dados relacional.',
-    technologies: 'Java · Spring Boot · JPA · MySQL',
-    githubUrl: 'https://github.com/pauloartur23',
+    title: 'Universal Data Converter',
+    description: 'Ferramenta Java para conversão universal de dados entre diferentes formatos. Solução robusta e reutilizável para transformação e processamento de dados.',
+    technologies: 'Java · Spring Boot · Maven · REST API',
+    githubUrl: 'https://github.com/pauloartur23/universal-data-converter',
     category: 'Java',
     featured: true,
   },
   {
     id: 4,
-    title: 'Calculadora Full Stack',
-    description: 'Calculadora web com back-end em Spring Boot e front-end em React. Integração via REST API.',
-    technologies: 'Java · Spring Boot · React · TypeScript',
-    githubUrl: 'https://github.com/pauloartur23',
-    category: 'Full Stack',
+    title: 'CondoDesk Dunnas',
+    description: 'Sistema de gestão condominial em Java. Controle de moradores, reservas, ocorrências e comunicados para facilitar a administração de condomínios.',
+    technologies: 'Java · Spring Boot · JPA · MySQL · Maven',
+    githubUrl: 'https://github.com/pauloartur23/condodesk-dunnas',
+    category: 'Java',
+    featured: true,
+  },
+  {
+    id: 5,
+    title: 'App Delivery React',
+    description: 'Aplicação de delivery com React e JavaScript. Interface moderna para listagem de produtos, carrinho de compras e fluxo de pedidos.',
+    technologies: 'JavaScript · React · CSS · HTML',
+    githubUrl: 'https://github.com/pauloartur23/app-delivery-react',
+    category: 'Frontend',
     featured: false,
   },
 ];
@@ -47,7 +56,8 @@ const projectsStatic: Project[] = [
 const categoryColors: Record<string, string> = {
   Java: '#6c63ff',
   'Full Stack': '#ff6584',
-  Web: '#43e97b',
+  Frontend: '#43e97b',
+  Web: '#f9ca24',
 };
 
 const Projects: React.FC<Props> = ({ projects }) => {
@@ -65,8 +75,6 @@ const Projects: React.FC<Props> = ({ projects }) => {
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800 }}>
           Projetos em <span style={{ color: 'var(--accent)' }}>Destaque</span>
         </h2>
-
-        {/* Filter pills */}
         <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
           {categories.map(cat => (
             <button key={cat} onClick={() => setFilter(cat)} style={{
@@ -95,7 +103,7 @@ const Projects: React.FC<Props> = ({ projects }) => {
               const el = e.currentTarget as HTMLDivElement;
               el.style.transform = 'translateY(-6px)';
               el.style.borderColor = color;
-              el.style.boxShadow = `0 16px 48px rgba(0,0,0,0.3)`;
+              el.style.boxShadow = '0 16px 48px rgba(0,0,0,0.3)';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLDivElement;
@@ -104,14 +112,8 @@ const Projects: React.FC<Props> = ({ projects }) => {
               el.style.boxShadow = 'none';
             }}
             >
-              {/* Card header */}
-              <div style={{
-                height: '6px',
-                background: `linear-gradient(90deg, ${color}, ${color}44)`,
-              }} />
-
+              <div style={{ height: '6px', background: `linear-gradient(90deg, ${color}, ${color}44)` }} />
               <div style={{ padding: '1.8rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                {/* Category badge */}
                 <div style={{ marginBottom: '1rem' }}>
                   <span style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '0.1em',
@@ -126,15 +128,12 @@ const Projects: React.FC<Props> = ({ projects }) => {
                     }}>★ Destaque</span>
                   )}
                 </div>
-
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.8rem', lineHeight: 1.3 }}>
                   {project.title}
                 </h3>
                 <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7, flex: 1, marginBottom: '1.5rem' }}>
                   {project.description}
                 </p>
-
-                {/* Tech tags */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
                   {project.technologies.split('·').map((tech, ti) => (
                     <span key={ti} style={{
@@ -144,32 +143,25 @@ const Projects: React.FC<Props> = ({ projects }) => {
                     }}>{tech.trim()}</span>
                   ))}
                 </div>
-
-                {/* Actions */}
-                <div style={{ display: 'flex', gap: '0.8rem' }}>
-                  <a href={project.githubUrl} target="_blank" rel="noreferrer" style={{
-                    flex: 1, textAlign: 'center',
-                    background: color, color: '#fff', padding: '0.6rem',
-                    borderRadius: '6px', textDecoration: 'none',
-                    fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 700,
-                    transition: 'opacity 0.2s',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                  >Ver no GitHub ↗</a>
-                </div>
+                <a href={project.githubUrl} target="_blank" rel="noreferrer" style={{
+                  textAlign: 'center', background: color, color: '#fff', padding: '0.6rem',
+                  borderRadius: '6px', textDecoration: 'none',
+                  fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 700,
+                  transition: 'opacity 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                >Ver no GitHub ↗</a>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Ver todos no GitHub */}
       <div style={{ textAlign: 'center', marginTop: '3rem' }}>
         <a href="https://github.com/pauloartur23" target="_blank" rel="noreferrer" style={{
           fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--accent)',
           textDecoration: 'none', borderBottom: '1px solid var(--accent)', paddingBottom: '2px',
-          transition: 'opacity 0.2s',
         }}>Ver todos os repositórios no GitHub →</a>
       </div>
     </section>
@@ -177,3 +169,4 @@ const Projects: React.FC<Props> = ({ projects }) => {
 };
 
 export default Projects;
+
